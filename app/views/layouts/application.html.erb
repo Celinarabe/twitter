@@ -38,9 +38,20 @@
           <div class="navbar-end">
             <div class="field is-grouped">
               <p class="control">
-                <%= link_to "New Tweeet", new_tweeet_path, class: "button is-info is-inverted" %>
+                <%= link_to "New Tweeet", root_path, class: "button is-info is-inverted" %>
               </p>
-              <p class="control">Sign Up</p>
+              <% if user_signed_in? %>
+              <p class="control">
+              <%= link_to current_user.name, edit_user_registration_path, class: 'button is-info' %>
+              </p>
+              <p>
+                <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "button is-info" %>
+              </p>
+              <% else %>
+
+               <%= link_to "Sign up", new_user_registration_path, class: 'button is-info' %>
+                <%= link_to "Sign in", new_user_session_path, class: 'button is-info' %>
+                <% end %>
             </div>
           </div>
         </div>
